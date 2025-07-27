@@ -54,7 +54,7 @@ function handlePost(req, res, hexo) {
             const filePath = path.join(hexo.base_dir, requestFilePath);
 
             checkPath(filePath, hexo);
-            fs.writeFileSync(path.join(hexo.base_dir, requestFilePath), data);
+            fs.writeFileSync(filePath, data);
 
             res.writeHead(201);
             res.end();
