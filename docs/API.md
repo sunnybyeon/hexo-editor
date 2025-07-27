@@ -1,6 +1,8 @@
 # RESTful API Documentation
 
-The response data will be in `json`. The request body should be in `json` as well.
+The response data will be in JSON. The request body should be in JSON as well.
+
+All paths in the response data are relative to the `base_dir` of the hexo blog, and those in the request data are expected to be so as well.
 
 ## Base URL
 
@@ -14,9 +16,9 @@ Retrieve the metadata and contents of a file.
 
 #### Query Parameters
 
-| Name | Type   | Required | Description                                                                                 |
-| ---- | ------ | -------- | ------------------------------------------------------------------------------------------- |
-| path | string | Yes      | The path of the file to retrieve. It should be relative to the `base_dir` of the hexo blog. |
+| Name | Type   | Required | Description                       |
+| ---- | ------ | -------- | --------------------------------- |
+| path | string | Yes      | The path of the file to retrieve. |
 
 #### Response
 
@@ -101,7 +103,7 @@ Creates a new Hexo post.
 
 ```json
 {
-    "path": "path/to/the/created/post/file",
+    "path": "path/to/the/new/post/file",
     "content": "Content of the new post file."
 }
 ```

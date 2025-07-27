@@ -41,6 +41,8 @@ function handlePost(req, res, hexo) {
                     handleError(res, error);
                     return;
                 }
+
+                result.path = result.path.replace(hexo.base_dir, "");
                 res.writeHead(201);
                 res.end(JSON.stringify(result));
             });
