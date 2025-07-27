@@ -29,11 +29,7 @@ function handleRequest(req, res, hexo) {
  */
 function handleGet(req, res, hexo) {
     const reqURL = new URL(req.url, "http://localhost/");
-    const filePath = path.join(
-        hexo.base_dir,
-        reqURL.searchParams.get("path"),
-        "./"
-    );
+    const filePath = path.join(hexo.base_dir, reqURL.searchParams.get("path"));
 
     checkPath(filePath, hexo);
     const data = fs.readFileSync(filePath);
@@ -55,7 +51,7 @@ function handlePost(req, res, hexo) {
         try {
             /** @type {{path: string, data: string}} */
             const { path: requestFilePath, data } = JSON.parse(reqBody);
-            const filePath = path.join(hexo.base_dir, requestFilePath, "./");
+            const filePath = path.join(hexo.base_dir, requestFilePath);
 
             checkPath(filePath, hexo);
             fs.writeFileSync(path.join(hexo.base_dir, requestFilePath), data);
