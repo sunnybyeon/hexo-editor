@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hexo Web Editor</title>
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <nav id="file-browser">
+            <div>
+                <h1><span>Hexo/</span></h1>
+                <button id="new-post-open">+ New Post</button>
+            </div>
+            <ul></ul>
+        </nav>
+        <section id="text-editor">
+            <div>
+                <input
+                    type="text"
+                    placeholder="File Path"
+                    id="text-editor-path"
+                />
+                <button id="text-editor-save">Save File</button>
+            </div>
+            <textarea></textarea>
+        </section>
+        <dialog id="new-post">
+            <input type="text" placeholder="Post Title" id="new-post-title" />
+            <select id="new-post-layout" class="not-selected">
+                <option value="">Choose a Layout (Optional)</option>
+                <option value="post">post</option>
+                <option value="page">page</option>
+                <option value="draft">draft</option>
+            </select>
+            <input
+                type="text"
+                placeholder="Slug (Optional)"
+                id="new-post-slug"
+            />
+            <input
+                type="text"
+                placeholder="Path (Optional)"
+                id="new-post-path"
+            />
+            <label>
+                <input type="checkbox" id="new-post-replace" />
+                Replace already existing files
+            </label>
+            <div>
+                <button id="new-post-cancel">Cancel</button>
+                <button id="new-post-create">Create Post</button>
+            </div>
+        </dialog>
+        <dialog id="message">
+            <p></p>
+            <div>
+                <button>OK</button>
+            </div>
+        </dialog>
+        <script src="./index.js" type="module"></script>
+    </body>
+</html>

@@ -17,6 +17,7 @@
         "typescript": "^5.8.3"
     },
     "dependencies": {
-        "hexo-fs": "^5.0.0"
+        "hexo-fs": "^5.0.0",
+        "serve-static": "^2.2.0"
     }
 }
