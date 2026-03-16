@@ -4,7 +4,7 @@ const { handleError } = require("../error");
 const { checkPath } = require("../utils");
 
 /**
- * Handles the requests to /hexo/post.
+ * Handles the requests to /hexo/new.
  * @param {import("connect").IncomingMessage} req
  * @param {import("http").ServerResponse} res
  * @param {import("hexo")} hexo
@@ -19,7 +19,7 @@ function handleRequest(req, res, hexo) {
 }
 
 /**
- * Handles the POST requests to /hexo/post.
+ * Handles the POST requests to /hexo/new.
  * @param {import("connect").IncomingMessage} req
  * @param {import("http").ServerResponse} res
  * @param {import("hexo")} hexo
@@ -27,25 +27,20 @@ function handleRequest(req, res, hexo) {
 function handlePost(req, res, hexo) {
     let reqBody = "";
     req.on("data", (chunk) => (reqBody += chunk));
-    req.on("end", () => {
+    req.on("end", async () => {
         try {
             /** @type {{title: string, layout?: string, slug?: string, path?: string, replace: boolean}} */
             const { replace, ...data } = Object.assign(
                 { replace: false },
-                JSON.parse(reqBody)
+                JSON.parse(reqBody),
             );
             checkPath(path.join(hexo.base_dir, data.path || "", "./"), hexo);
 
-            hexo.post.create(data, replace, (error, result) => {
-                if (error) {
-                    handleError(res, error);
-                    return;
-                }
+            await hexo.post.create(data, replace);
+            await hexo.source.process();
 
-                result.path = result.path.replace(hexo.base_dir, "");
-                res.writeHead(201);
-                res.end(JSON.stringify(result));
-            });
+            res.writeHead(201);
+            res.end();
         } catch (error) {
             handleError(res, error);
         }

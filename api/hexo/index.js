@@ -1,3 +1,5 @@
-const post = require("./post");
+const posts = require("./posts");
+const pages = require("./pages");
+const newAPI = require("./new");
 
-module.exports = { post };
+module.exports = { posts, pages, newAPI };

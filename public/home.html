@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home | Hexo Web Editor</title>
+        <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="./styles/home.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <main>
+            <section id="posts">
+                <div>
+                    <h1>Posts</h1>
+                    <button id="new-post-open">+ New Post</button>
+                </div>
+                <ul></ul>
+            </section>
+            <section id="pages">
+                <div>
+                    <h1>Pages</h1>
+                    <button id="new-page-open">+ New Page</button>
+                </div>
+                <ul></ul>
+            </section>
+        </main>
+        <dialog id="new">
+            <input type="text" placeholder="Post Title" id="new-title" />
+            <input
+                type="text"
+                placeholder="Layout (Optional)"
+                list="post-layout-list"
+                id="new-layout"
+            />
+            <input type="text" placeholder="Slug (Optional)" id="new-slug" />
+            <input type="text" placeholder="Path (Optional)" id="new-path" />
+            <label>
+                <input type="checkbox" id="new-replace" />
+                Replace already existing files
+            </label>
+            <div>
+                <button id="new-cancel">Cancel</button>
+                <button id="new-create">Create</button>
+            </div>
+        </dialog>
+        <datalist id="post-layout-list">
+            <option value="post" label="post"></option>
+            <option value="draft" label="draft"></option>
+        </datalist>
+        <dialog id="message">
+            <p></p>
+            <div>
+                <button>OK</button>
+            </div>
+        </dialog>
+        <script src="./scripts/home.js" type="module"></script>
+    </body>
+</html>

@@ -1,4 +1,28 @@
-import elements from "./elements.js";
+import { showMessage } from "./message.js";
+
+const elements = {
+    fileBrowser: {
+        nav: document.getElementById("file-browser"),
+        h1: /** @type {HTMLHeadingElement} */ (
+            document.querySelector("nav#file-browser h1")
+        ),
+        ul: /** @type {HTMLUListElement} */ (
+            document.querySelector("nav#file-browser ul")
+        ),
+    },
+    textEditor: {
+        section: document.getElementById("text-editor"),
+        pathInput: /** @type {HTMLInputElement} */ (
+            document.getElementById("text-editor-path")
+        ),
+        saveButton: /** @type {HTMLButtonElement} */ (
+            document.getElementById("text-editor-save")
+        ),
+        textArea: /** @type {HTMLTextAreaElement} */ (
+            document.querySelector("section#text-editor textarea")
+        ),
+    },
+};
 
 elements.fileBrowser.h1.children[0].addEventListener("click", () => {
     openDirectory("/");
@@ -9,43 +33,14 @@ elements.textEditor.saveButton.addEventListener("click", () => {
         elements.textEditor.textArea.value,
     );
 });
-elements.newPost.openButton.addEventListener("click", () => {
-    elements.newPost.dialog.showModal();
-});
-elements.newPost.cancelButton.addEventListener("click", () => {
-    elements.newPost.dialog.close();
-});
-elements.newPost.createButton.addEventListener("click", () => {
-    const postData = {
-        title: elements.newPost.titleInput.value,
-        ...(elements.newPost.layoutSelect.value && {
-            layout: elements.newPost.layoutSelect.value,
-        }),
-        ...(elements.newPost.slugInput.value && {
-            slug: elements.newPost.layoutSelect.value,
-        }),
-        ...(elements.newPost.pathInput.value && {
-            path: elements.newPost.pathInput.value,
-        }),
-        ...(elements.newPost.replaceCheckbox.checked && {
-            replace: elements.newPost.replaceCheckbox.checked,
-        }),
-    };
-    createPost(postData).finally(() => {
-        elements.newPost.dialog.close();
-    });
-});
-elements.newPost.layoutSelect.addEventListener("change", () => {
-    if (elements.newPost.layoutSelect.value) {
-        elements.newPost.layoutSelect.classList.remove("not-selected");
-    } else {
-        elements.newPost.layoutSelect.classList.add("not-selected");
-    }
-});
-elements.message.okButton.addEventListener("click", () => {
-    elements.message.dialog.close();
-});
-openDirectory("/");
+
+const path = new URLSearchParams(document.location.search).get("path");
+if (path) {
+    openDirectory(path.substring(0, path.lastIndexOf("/")));
+    openFile(path);
+} else {
+    openDirectory("/");
+}
 
 /**
  * Fetches the directory contents and displays them on the file browser.
@@ -174,58 +169,7 @@ async function saveFile(filePath, data) {
 }
 
 /**
- * @typedef {Object} PostConfig
- * @property {string} title
- * @property {string} [layout]
- * @property {string} [slug]
- * @property {string} [path]
- * @property {boolean} [replace]
- */
-/**
- * Create a new post.
- * @param {PostConfig} data
- */
-async function createPost(data) {
-    try {
-        const response = await fetch("./api/hexo/post", {
-            body: JSON.stringify(data),
-            method: "POST",
-        });
-
-        if (!response.ok) {
-            throw new Error(
-                `Something went wrong while creating a new post with the title: <code>${data.title}</code><br /><code>` +
-                    (await response.json()).error +
-                    "</code>",
-            );
-        }
-
-        /** @type {{path: string, content: string}} */
-        const { path, content } = await response.json();
-
-        elements.textEditor.pathInput.value = path;
-        elements.textEditor.textArea.value = content;
-
-        showMessage(
-            `Successfully created the post: <code>${data.title}</code>, and opened the file in the editor.`,
-        );
-    } catch (error) {
-        showMessage(String(error));
-    }
-}
-
-/**
- * Displays the message to the user via the message dialog. The message can contain some HTML.
- * @param {string} message
- */
-function showMessage(message) {
-    elements.message.paragraph.replaceChildren();
-    elements.message.paragraph.insertAdjacentHTML("afterbegin", message);
-    elements.message.dialog.showModal();
-}
-
-/**
- * Returns the normalized path. The returned path won't have a leading '/'.
+ * Returns the normalized path, i.e. the returned path won't have a leading '/'.
  * @param {string} path
  */
 function normalizePath(path) {

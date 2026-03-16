@@ -73,19 +73,59 @@ Retrieves the contents of a directory.
 }
 ```
 
-### POST `/hexo/post`
+### GET `/hexo/posts`
 
-Creates a new Hexo post.
+Retrieves a full list of all Hexo posts.
+
+#### Response
+
+##### `200 OK`
+
+```json
+{
+    "posts": [
+        {
+            "title": "Hello, World",
+            "source": "/source/_posts/hello.md",
+            "date": "2013-02-04T22:44:30.652Z" // as ISO8601
+        }
+    ]
+}
+```
+
+### GET `/hexo/pages`
+
+Retrieves a full list of all Hexo pages.
+
+#### Response
+
+##### `200 OK`
+
+```json
+{
+    "pages": [
+        {
+            "title": "Hello, World",
+            "source": "/source/page/index.md",
+            "date": "2013-02-04T22:44:30.652Z" // as ISO8601
+        }
+    ]
+}
+```
+
+### POST `/hexo/new`
+
+Creates a new Hexo article (post, page).
 
 #### Request Body
 
-| Name    | Type    | Required | Description                                                                 |
-| ------- | ------- | -------- | --------------------------------------------------------------------------- |
-| title   | string  | Yes      | The title of the post.                                                      |
-| layout  | string  | No       | The layout to use. Defaults to the `default_layout` setting of Hexo.        |
-| slug    | string  | No       | The slug(URL) of the post.                                                  |
-| path    | string  | No       | The path of the post file. Defaults to the `new_post_past` setting of Hexo. |
-| replace | boolean | No       | Whether to replace existing files or not. Default: `false`                  |
+| Name    | Type    | Required | Description                                                                    |
+| ------- | ------- | -------- | ------------------------------------------------------------------------------ |
+| title   | string  | Yes      | The title of the article.                                                      |
+| layout  | string  | No       | The layout to use. Defaults to the `default_layout` setting of Hexo.           |
+| slug    | string  | No       | The slug(URL) of the article.                                                  |
+| path    | string  | No       | The path of the article file. Defaults to the `new_post_past` setting of Hexo. |
+| replace | boolean | No       | Whether to replace existing files or not. Default: `false`                     |
 
 ```json
 {
@@ -100,13 +140,6 @@ Creates a new Hexo post.
 #### Response
 
 ##### `201 Created`
-
-```json
-{
-    "path": "path/to/the/new/post/file",
-    "content": "Content of the new post file."
-}
-```
 
 ## Error
 

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Files | Hexo Web Editor</title>
+        <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="./styles/files.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <nav id="file-browser">
+            <div>
+                <h1><span>Hexo/</span></h1>
+                <a href="./home" class="button">Home</a>
+                <a href="../" class="button">Blog</a>
+            </div>
+            <ul></ul>
+        </nav>
+        <section id="text-editor">
+            <div>
+                <input
+                    type="text"
+                    placeholder="File Path"
+                    id="text-editor-path"
+                />
+                <button id="text-editor-save">Save File</button>
+            </div>
+            <textarea></textarea>
+        </section>
+        <dialog id="message">
+            <p></p>
+            <div>
+                <button>OK</button>
+            </div>
+        </dialog>
+        <script src="./scripts/files.js" type="module"></script>
+    </body>
+</html>

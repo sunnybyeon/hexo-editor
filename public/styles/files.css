@@ -1,0 +1,85 @@
+nav#file-browser {
+    width: 100%;
+    height: 30%;
+    padding: 0 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--monospace-font);
+}
+nav#file-browser div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+nav#file-browser div h1 {
+    margin: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-x: auto;
+    font-size: 1.75rem;
+}
+nav#file-browser div h1 span:hover {
+    cursor: pointer;
+}
+nav#file-browser ul {
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    flex-grow: 1;
+}
+nav#file-browser ul li {
+    margin: 0.2rem 0;
+}
+nav#file-browser ul li.directory {
+    text-decoration: underline;
+}
+nav#file-browser ul li:hover {
+    cursor: pointer;
+}
+section#text-editor {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+}
+section#text-editor div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    margin: 0 0 1rem;
+}
+section#text-editor div input {
+    flex-grow: 1;
+    font-family: "Fira Code", monospace;
+}
+section#text-editor textarea {
+    display: block;
+    width: 100%;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 2px dashed var(--light-grey-foreground);
+    outline: none;
+    font-family: "PT Serif", serif;
+    font-size: 0.9rem;
+}
+section#text-editor textarea:focus {
+    border-color: var(--dark-grey-foreground);
+}
+
+@media (min-width: 1200px) {
+    body {
+        display: flex;
+    }
+    nav#file-browser {
+        width: 25%;
+        height: 100%;
+        padding-right: 0 0.75rem 0 0;
+    }
+    section#text-editor {
+        width: 75%;
+        height: 100%;
+        padding-left: 0.75rem;
+    }
+}

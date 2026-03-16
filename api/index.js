@@ -23,8 +23,12 @@ function createMiddleware(hexo) {
                 api.fs.file(req, res, hexo);
             } else if (reqURL.pathname === "/fs/directory/") {
                 api.fs.directory(req, res, hexo);
-            } else if (reqURL.pathname === "/hexo/post/") {
-                api.hexo.post(req, res, hexo);
+            } else if (reqURL.pathname === "/hexo/posts/") {
+                api.hexo.posts(req, res, hexo);
+            } else if (reqURL.pathname === "/hexo/pages/") {
+                api.hexo.pages(req, res, hexo);
+            } else if (reqURL.pathname == "/hexo/new/") {
+                api.hexo.newAPI(req, res, hexo);
             } else {
                 res.writeHead(404);
                 res.end();

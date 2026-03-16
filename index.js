@@ -11,7 +11,9 @@ hexo.extend.filter.register("server_middleware", addMiddlewares);
 function addMiddlewares(app) {
     app.use(
         hexo.config.root + "editor/",
-        serveStatic(path.join(__dirname, "./public/"))
+        serveStatic(path.join(__dirname, "./public/"), {
+            extensions: ["html"],
+        }),
     );
     app.use(hexo.config.root + "editor/api/", serveAPI(hexo));
 }

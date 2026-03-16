@@ -1,0 +1,78 @@
+:root {
+    --light-grey-backgroud: #e9e9e9;
+    --dark-grey-background: #ddd;
+    --light-grey-foreground: #b8b8b8;
+    --dark-grey-foreground: #555;
+
+    --border-style: 2px dashed var(--light-grey-foreground);
+
+    --serif-font: "PT Serif", serif;
+    --monospace-font: "Fira Code", monospace;
+}
+* {
+    box-sizing: border-box;
+    font-family: inherit;
+    accent-color: var(--dark-grey-foreground);
+}
+
+body {
+    width: 100dvw;
+    height: 100dvh;
+    margin: 0;
+    padding: 1rem 1.3rem 1.3rem;
+    font-family: var(--serif-font);
+}
+
+button,
+.button {
+    padding: 0.3rem 0.7rem;
+    background-color: var(--light-grey-backgroud);
+    border: none;
+    font-size: 0.9rem;
+    color: black;
+}
+button:hover,
+.button:hover {
+    background-color: var(--dark-grey-background);
+    cursor: pointer;
+}
+
+input,
+select {
+    margin: 0;
+    padding: 0.5rem;
+    background: none;
+    border-width: 0 0 2px;
+    border-color: var(--light-grey-foreground);
+    border-radius: 0;
+    outline: none;
+    font-size: 0.9rem;
+}
+input:focus,
+select:focus {
+    border-color: var(--dark-grey-foreground);
+}
+input::placeholder {
+    color: var(--light-grey-foreground);
+}
+
+dialog {
+    width: calc(100% - 2.6rem);
+    max-width: 500px;
+    padding: 0.7rem 1rem 1rem;
+    border: 3px solid var(--dark-grey-foreground);
+}
+dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
+dialog#message p {
+    margin: 0;
+}
+dialog#message p code {
+    font-family: var(--monospace-font);
+    font-size: 0.9rem;
+}
+dialog#message div {
+    margin: 0.75rem 0 0;
+    text-align: right;
+}
